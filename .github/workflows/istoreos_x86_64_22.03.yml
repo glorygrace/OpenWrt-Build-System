@@ -38,8 +38,8 @@ env:
   SSH_TIME2: '340'   #单位分钟,设置暂停工作流时间,可用pkill sleep命令提前继续工作流,整个工作流运行时间不能超过6小时
   CACHE_CCACHE: 'false'    #是否开启ccache功能(true/false)
   CACHE_CLEAN: 'false'     #是否清除缓存(true/false)
-  UPLOAD_ARTIFACT: 'false'   #是否上传到ARTIFACT(true/false)
-  UPLOAD_RELEASE: 'true'    #是否上传到RELEASE(true/false)
+  UPLOAD_ARTIFACT: 'true'   #是否上传到ARTIFACT(true/false)
+  UPLOAD_RELEASE: 'false'    #是否上传到RELEASE(true/false)
 
 
 jobs:
