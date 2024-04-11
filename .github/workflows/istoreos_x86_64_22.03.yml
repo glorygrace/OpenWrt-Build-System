@@ -396,7 +396,7 @@ jobs:
           ```
 
     - name: Organize files
-      if: env.BD_COMPILE == 'success' && env.UPLOAD_ARTIFACT == 'true'
+      if: env.BD_COMPILE == 'success'
       working-directory: ${{ env.FIRMWARE_PATH }}
       run: |
         echo "==============清理文件中============="
