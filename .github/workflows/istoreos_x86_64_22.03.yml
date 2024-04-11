@@ -398,14 +398,12 @@ jobs:
       if: env.BD_COMPILE == 'success' && env.UPLOAD_ARTIFACT == 'true'
       working-directory: ${{ env.FIRMWARE_PATH }}
       run: |
-        echo "=============生成文件列表============="
-        ls -lh | awk '{print $9, $5}'
         echo "==============清理文件中============="
         rm -rf *kernel.bin *rootfs* *.json *.tar.zst
         sleep 2
-        echo "=============上传文件列表============="
-        ls -lh | awk '{print $9, $5}'
-        echo "===================================="
+        t=${{ env.REPO_BRANCH }}_$(date +%Y%m%d%H%M%S).tar.gz
+        echo "FILE_NAME=$t" >> $GITHUB_ENV
+        tar -zcvf $t *
 
     - name : Upload artifact
       uses: actions/upload-artifact@main
@@ -414,6 +412,16 @@ jobs:
         name: ${{ env.BD_PROJECT }}-firmware-${{ env.BD_TARGET }}-${{ env.DATE }}
         path: ${{ env.FIRMWARE_PATH }} 
         retention-days: 2
+        
+    - name: Upload firmware to WenShuShu
+      id: WenShuShu
+      if: env.BD_COMPILE == 'success' && env.UPLOAD_WENSHUSHU == 'true'
+      working-directory: ${{ env.FIRMWARE_PATH }}
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wss -s -p 16 --no-progress ${{ env.FILE_NAME }} | tee wenshushu.log
+        echo "::warning file=wenshushu.cn::$(cat wenshushu.log | grep https)" 
+        echo "::set-output name=url::$(cat wenshushu.log | grep https | cut -f3 -d" ")"
 
     - name: Check Disk
       continue-on-error: true
