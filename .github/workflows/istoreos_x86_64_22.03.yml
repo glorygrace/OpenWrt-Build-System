@@ -362,6 +362,16 @@ jobs:
           exit 1
         fi
 
+    - name: Organize files
+      if: env.BD_COMPILE == 'success'
+      working-directory: ${{ env.FIRMWARE_PATH }}
+      run: |
+        echo "==============清理文件中============="
+        rm -rf *kernel.bin *rootfs* *.json *.tar.zst
+        sleep 2
+        t=${{ env.REPO_BRANCH }}_$(date +%Y%m%d%H%M%S).tar.gz
+        echo "FILE_NAME=$t" >> $GITHUB_ENV
+        tar -zcvf $t *
     
     - name: Upload Firmware To Release
       if: env.BD_COMPILE == 'success' && env.UPLOAD_RELEASE == 'true'
@@ -394,17 +404,6 @@ jobs:
           ZeroTier
           应用中心(iStore)
           ```
-
-    - name: Organize files
-      if: env.BD_COMPILE == 'success'
-      working-directory: ${{ env.FIRMWARE_PATH }}
-      run: |
-        echo "==============清理文件中============="
-        rm -rf *kernel.bin *rootfs* *.json *.tar.zst
-        sleep 2
-        t=${{ env.REPO_BRANCH }}_$(date +%Y%m%d%H%M%S).tar.gz
-        echo "FILE_NAME=$t" >> $GITHUB_ENV
-        tar -zcvf $t *
 
     - name : Upload artifact
       uses: actions/upload-artifact@main
