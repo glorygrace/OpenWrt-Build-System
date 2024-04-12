@@ -143,7 +143,7 @@ jobs:
         CONFIG_FILE: './config/${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}.config'
         CONFIG_FILES: './customize/files'
       run: |
-        [ -e $CONFIG_FILES ] && mv $CONFIG_FILES ${{ env.BD_PROJECT }}/files
+       # [ -e $CONFIG_FILES ] && mv $CONFIG_FILES ${{ env.BD_PROJECT }}/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ${{ env.BD_PROJECT }}/.config
         cd ${{ env.BD_PROJECT }}
         sudo echo "cd $PWD" >> /home/runner/.bashrc
