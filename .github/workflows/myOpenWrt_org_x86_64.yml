@@ -141,14 +141,13 @@ jobs:
     - name: "Configuration Customization - Build_${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}"
       env:
         CONFIG_FILE: './config/${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}.config'
-        #CONFIG_FILES: './customize/files'
       run: |
         cp customize/files ${{ env.BD_PROJECT }}
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ${{ env.BD_PROJECT }}/.config
         cd ${{ env.BD_PROJECT }}
         sudo echo "cd $PWD" >> /home/runner/.bashrc
         [ "${{ env.CACHE_CCACHE }}" == 'true' ] && echo -e 'CONFIG_CCACHE=y' >> .config
-        # make defconfig
+        
 
     - name: Setup ssh for debug 
       if: env.SSH_DEBUG == 'true'
