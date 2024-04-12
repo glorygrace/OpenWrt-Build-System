@@ -19,7 +19,7 @@ jobs:
           curl -X POST \
           "https://iyuu.cn/${{ secrets.IYUU_TOKEN }}.send" \
           -H 'Content-Type: application/json' \
-          -d '{"text": "'"${1}"'", "desp": "'"${2}"'"}' > /dev/null 2>&1
+          -d '{"text": "测试1", "desp": "测试2"}' > /dev/null 2>&1
           echo "=======已通过IYUU接口发送通知======="
         fi
       
