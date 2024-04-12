@@ -141,7 +141,6 @@ jobs:
     - name: "Configuration Customization - Build_${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}"
       env:
         CONFIG_FILE: './config/${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}.config'
-        CONFIG_FILES: './customize/${{ env.BD_PROJECT }}/files'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ${{ env.BD_PROJECT }}/.config
         cd ${{ env.BD_PROJECT }}
