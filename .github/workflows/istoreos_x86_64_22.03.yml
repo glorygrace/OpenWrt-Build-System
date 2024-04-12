@@ -275,6 +275,7 @@ jobs:
           tar -czvf packages.tar.gz packages
           rm -rf packages
           echo "===========编译成功,准备上传==========="
+          send_message "编译成功,准备上传" "编译成功,准备上传"
         else
           if [ "${{ env.SSH_SETUP }}" == 'success' ]; then
             echo "BD_COMPILE=standby" >> $GITHUB_ENV
