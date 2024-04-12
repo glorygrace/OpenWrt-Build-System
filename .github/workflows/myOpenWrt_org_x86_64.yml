@@ -142,7 +142,7 @@ jobs:
       env:
         CONFIG_FILE: './config/${{ env.BD_PROJECT }}_${{ env.BD_TARGET }}.config'
       run: |
-        [ -e files ] && mv customize/files openwrt/files
+        [ -e files ] && mv customize/files ${{ env.BD_PROJECT }}/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ${{ env.BD_PROJECT }}/.config
         cd ${{ env.BD_PROJECT }}
         sudo echo "cd $PWD" >> /home/runner/.bashrc
