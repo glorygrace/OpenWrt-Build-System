@@ -1,0 +1,25 @@
+name: IYUU测试
+on: 
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: IYUU测试
+      run: |
+        if [ -n "${{ secrets.IYUU_TOKEN }}" ]; then
+          # 发送消息到 IYUU 接口
+          curl -X POST \
+          "https://iyuu.cn/${{ secrets.IYUU_TOKEN }}.send" \
+          -H 'Content-Type: application/json' \
+          -d '{"text": "'"${1}"'", "desp": "'"${2}"'"}' > /dev/null 2>&1
+          echo "=======已通过IYUU接口发送通知======="
+        fi
+      
