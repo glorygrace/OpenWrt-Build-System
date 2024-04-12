@@ -113,6 +113,8 @@ jobs:
         ln -sf /mnt/${{ env.BD_PROJECT }}/bin ${{ env.BD_PROJECT }}/bin
         ln -sf /mnt/${{ env.BD_PROJECT }}/staging_dir ${{ env.BD_PROJECT }}/staging_dir
         ln -sf /mnt/${{ env.BD_PROJECT }}/build_dir ${{ env.BD_PROJECT }}/build_dir
+        sudo mkdir -p -m 777 /${{ env.BD_PROJECT }}
+        ln -sf ${{ github.workspace }}/${{ env.BD_PROJECT }} /${{ env.BD_PROJECT }}
         echo "--------------------------硬盘信息--------------------------"
         echo "硬盘数量: $(ls /dev/sd* | grep -v [1-9] | wc -l)" && df -hT
 
