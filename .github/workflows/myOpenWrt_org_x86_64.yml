@@ -147,7 +147,8 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE ${{ env.BD_PROJECT }}/.config
         cd ${{ env.BD_PROJECT }}
         sudo echo "cd $PWD" >> /home/runner/.bashrc
-      # [ "${{ env.CACHE_CCACHE }}" == 'true' ] && echo -e 'CONFIG_CCACHE=y' >> .config
+        [ "${{ env.CACHE_CCACHE }}" == 'true' ] && echo -e 'CONFIG_CCACHE=y' >> .config
+        make defconfig
         
 
     - name: Setup ssh for debug 
