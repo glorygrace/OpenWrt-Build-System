@@ -63,8 +63,7 @@ return baseclass.extend({
 				systeminfo.load[0] / 65535.0,
 				systeminfo.load[1] / 65535.0,
 				systeminfo.load[2] / 65535.0
-			) : null,
-			_('GitHub \u9879\u76EE'),E('a',{'href':'https://github.com/lmxslpc/OpenWrt-Build-System','target':'_blank'},['\u4E91\u7F16\u8BD1\u7CFB\u7EDF'])
+			) : null
 		];
 
 		var table = E('table', { 'class': 'table' });
