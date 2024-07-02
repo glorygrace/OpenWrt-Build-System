@@ -39,7 +39,7 @@ env:
   CACHE_CCACHE: 'false'    #是否开启ccache功能(true/false)
   CACHE_CLEAN: 'false'     #是否清除缓存(true/false)
   UPLOAD_ARTIFACT: 'false'   #是否上传到ARTIFACT(true/false)
-  UPLOAD_RELEASE: 'false'    #是否上传到RELEASE(true/false)
+  UPLOAD_RELEASE: 'true'    #是否上传到RELEASE(true/false)
   UPLOAD_WENSHUSHU: true
 
 
