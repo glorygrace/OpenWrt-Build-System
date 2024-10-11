@@ -39,8 +39,8 @@ env:
   CACHE_CCACHE: 'false'    #是否开启ccache功能(true/false)
   CACHE_CLEAN: 'false'     #是否清除缓存(true/false)
   UPLOAD_ARTIFACT: 'false'   #是否上传到ARTIFACT(true/false)
-  UPLOAD_RELEASE: 'true'    #是否上传到RELEASE(true/false)
-
+  UPLOAD_RELEASE: 'false'    #是否上传到RELEASE(true/false)
+  UPLOAD_WENSHUSHU: true
 
 jobs:
   build:
@@ -417,6 +417,17 @@ jobs:
         name: ${{ env.BD_PROJECT }}-firmware-${{ env.BD_TARGET }}-${{ env.DATE }}
         path: ${{ env.FIRMWARE_PATH }} 
         retention-days: 2
+        
+    - name: Upload firmware to WenShuShu
+      id: WenShuShu
+      if: env.BD_COMPILE == 'success' && env.UPLOAD_WENSHUSHU == 'true'
+      working-directory: ${{ env.FIRMWARE_PATH }}
+      run: |
+        curl -fsSL git.io/file-transfer | sh
+        ./transfer wss -s -p 16 --no-progress ${{ env.FILE_NAME }} | tee wenshushu.log
+        echo "::warning file=wenshushu.cn::$(cat wenshushu.log | grep https)" 
+        echo "::set-output name=url::$(cat wenshushu.log | grep https | cut -f3 -d" ")"
+
 
     - name: Check Disk
       continue-on-error: true
