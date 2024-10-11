@@ -1,2 +1,3 @@
 src-include defaults feeds.conf.default
-src-git kiddin9 https://github.com/kiddin9/openwrt-packages
+# src-git kiddin9 https://github.com/kiddin9/openwrt-packages
+src-git kenzo https://github.com/kenzok8/openwrt-packages
