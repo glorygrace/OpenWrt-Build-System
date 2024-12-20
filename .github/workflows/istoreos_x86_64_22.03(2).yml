@@ -1,4 +1,4 @@
-name: iStoreOS_x86_64_22.03
+name: iStoreOS_x86_64_22.03(2)
 
 on: 
   workflow_dispatch:
